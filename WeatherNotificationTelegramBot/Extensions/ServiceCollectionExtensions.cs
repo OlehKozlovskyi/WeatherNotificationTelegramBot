@@ -26,7 +26,6 @@ namespace WeatherNotificationTelegramBot.Extensions
         {
             services.AddSingleton<UpdateHandleService>();
             services.AddSingleton<IOpenWeatherService, OpenWeatherService>();
-            services.AddSingleton<IGeoCoordinatsService, GeoCoordinatsService>();
             return services;
         }
     }
