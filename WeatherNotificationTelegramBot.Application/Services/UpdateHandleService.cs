@@ -6,10 +6,11 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InlineQueryResults;
 using Telegram.Bot.Types.ReplyMarkups;
+using WeatherNotificationTelegramBot.Application.Abstractions;
 
 namespace WeatherNotificationTelegramBot.Application.Services
 {
-    public class UpdateHandleService(ITelegramBotClient client, ILogger<UpdateHandleService> logger)
+    public class UpdateHandleService(ITelegramBotClient client, ILogger<UpdateHandleService> logger, IOpenWeatherService weatherService)
     {
         public async Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, HandleErrorSource source, CancellationToken cancellationToken)
         {
@@ -44,7 +45,8 @@ namespace WeatherNotificationTelegramBot.Application.Services
 
         private async Task GetWeatherAsync(Message msg)
         {
-            await client.SendMessage(msg.Chat.Id, $"В {msg.Text} +20 нахуй:");
+            await weatherService.GetWeatherAsync(msg.Text);
+            //await client.SendMessage(msg.Chat.Id, $"В {msg.Text} +20 нахуй:");
         }
 
         private async Task OnMessage(Message msg)

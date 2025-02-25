@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using WeatherNotificationTelegramBot.Application.Services;
+using WeatherNotificationTelegramBot.Settings;
 
 namespace WeatherNotificationTelegramBot.Controllers
 {

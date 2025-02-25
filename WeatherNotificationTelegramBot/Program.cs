@@ -1,5 +1,5 @@
-
 using WeatherNotificationTelegramBot.Extensions;
+using WeatherNotificationTelegramBot.Settings;
 
 namespace WeatherNotificationTelegramBot
 {
