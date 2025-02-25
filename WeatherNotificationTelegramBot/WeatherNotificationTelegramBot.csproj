@@ -12,4 +12,8 @@
     <PackageReference Include="Telegram.Bot" Version="22.4.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WeatherNotificationTelegramBot.Application\WeatherNotificationTelegramBot.Application.csproj" />
+  </ItemGroup>
+
 </Project>
