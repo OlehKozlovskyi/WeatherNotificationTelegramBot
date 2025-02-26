@@ -6,9 +6,5 @@ using System.Threading.Tasks;
 
 namespace WeatherNotificationTelegramBot.Application.Entities
 {
-    public class Location
-    {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-    }
+    public record Coord(double Lon, double Lat);
 }

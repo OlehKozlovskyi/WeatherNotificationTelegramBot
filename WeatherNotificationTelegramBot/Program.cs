@@ -1,3 +1,5 @@
+using System.Text.Json;
+using WeatherNotificationTelegramBot.Application.Settings;
 using WeatherNotificationTelegramBot.Extensions;
 using WeatherNotificationTelegramBot.Settings;
 
@@ -15,6 +17,8 @@ namespace WeatherNotificationTelegramBot
             _services.AddTelegramClientSettings("TelegramBotSettings", _configuration);
             _services.AddTelegramClient(telegramBotSettings);
             _services.AddCustomServices();
+            _services.Configure<JsonSerializerOptions>(_configuration.GetSection("JsonSerializerOptions"));
+            _services.Configure<OpenWeatherApiOptions>(_configuration.GetSection("OpenWeatherApiOptions"));
             _services.ConfigureTelegramBotMvc();
             _services.AddControllers();
 

@@ -2,8 +2,8 @@
 
 namespace WeatherNotificationTelegramBot.Application.Abstractions
 {
-    public interface IOpenWeatherService
+    public interface IWeatherParser
     {
-        Task<WeatherData> GetWeatherAsync(string location);
+        WeatherData Parse(string jsonData);
     }
 }

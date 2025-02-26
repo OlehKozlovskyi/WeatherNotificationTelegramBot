@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using WeatherNotificationTelegramBot.Application.Abstractions;
+using WeatherNotificationTelegramBot.Application.Helpers;
 using WeatherNotificationTelegramBot.Application.Services;
 using WeatherNotificationTelegramBot.Settings;
 
@@ -26,6 +27,7 @@ namespace WeatherNotificationTelegramBot.Extensions
         {
             services.AddSingleton<UpdateHandleService>();
             services.AddSingleton<IOpenWeatherService, OpenWeatherService>();
+            services.AddSingleton<IWeatherParser, WeatherJsonParser>();
             return services;
         }
     }
