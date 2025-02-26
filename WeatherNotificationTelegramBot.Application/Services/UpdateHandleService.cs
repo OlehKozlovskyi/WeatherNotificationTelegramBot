@@ -50,7 +50,7 @@ namespace WeatherNotificationTelegramBot.Application.Services
                 На даний час у {weatherInfo.Name}❤ погодні умови змінюються
                 температура повітря становить близько {weatherInfo.Main.Temp}°C🌡️ i відчувається як {weatherInfo.Main.Feels_Like}°C. 
                 Вітер помірний, з поривами до {weatherInfo.Wind.Speed} км/год🌬️.
-                Атмосферний тиск зараз складає {weatherInfo.Main.Pressure} мм рт. ст.
+                Атмосферний тиск зараз складає {weatherInfo.Main.Pressure} мм рт. ст.😧
                 """;
             await client.SendMessage(msg.Chat.Id, messageTemplate);
         }
