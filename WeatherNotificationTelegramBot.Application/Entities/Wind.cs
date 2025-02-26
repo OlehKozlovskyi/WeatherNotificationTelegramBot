@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace WeatherNotificationTelegramBot.Application.Entities
 {
-    public record Wind(double Speed, int Deg);
+    public record Wind(double Speed);
 }

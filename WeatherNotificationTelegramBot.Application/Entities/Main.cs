@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace WeatherNotificationTelegramBot.Application.Entities
 {
-    public record Main(double Temp, double Feels_Like, int Pressure, int Humidity);
+    public record Main(double Temp, double Feels_Like, int Pressure);
 }
