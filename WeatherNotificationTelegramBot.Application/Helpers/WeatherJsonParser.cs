@@ -20,9 +20,9 @@ namespace WeatherNotificationTelegramBot.Application.Helpers
         {
             _options = serializerOptions.Value;
         }
-        public WeatherData Parse(string jsonData)
+        public WeatherResponse Parse(string jsonData)
         {
-            return JsonSerializer.Deserialize<WeatherData>(jsonData, _options);
+            return JsonSerializer.Deserialize<WeatherResponse>(jsonData, _options);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeatherNotificationTelegramBot.Application.Entities
 {
-    public record WeatherData
+    public record WeatherResponse
     {
         public Main Main { get; init; }
         public Wind Wind { get; init; }

@@ -4,6 +4,6 @@ namespace WeatherNotificationTelegramBot.Application.Abstractions
 {
     public interface IWeatherParser
     {
-        WeatherData Parse(string jsonData);
+        WeatherResponse Parse(string jsonData);
     }
 }

@@ -21,12 +21,12 @@ namespace WeatherNotificationTelegramBot.Application.Services
             _apiOptions = options.Value;
         }
 
-        public async Task<WeatherData> GetWeatherAsync(string location)
+        public async Task<WeatherResponse> GetWeatherAsync(string location)
         {
             using HttpClient client = new HttpClient();
             string url = $"{_apiOptions.BaseUrl}?q={location}&appid={_apiOptions.ApiKey}&units=metric";
             var response = await client.GetStringAsync(url);
-            WeatherData weatherData = _weatherParser.Parse(response);
+            WeatherResponse weatherData = _weatherParser.Parse(response);
             return weatherData;
         }
     }
