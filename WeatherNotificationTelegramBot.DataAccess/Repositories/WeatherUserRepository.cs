@@ -4,11 +4,9 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Azure.Identity;
 using Dapper;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using WeatherNotificationTelegramBot.Application.Abstractions;
 using WeatherNotificationTelegramBot.Application.DTOs;
 using WeatherNotificationTelegramBot.DataAccess.Entities;
@@ -24,24 +22,36 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
 
         public async Task AddRecord(UserWeatherRecordDto recordDto)
         {
-            var builder = new MySqlConnectionStringBuilder
-            {
-                Server = "localhost",
-                Database = "TelegramDatabase",
-                UserID = "root",
-                Password = "1111"
-            };
             var user = new User
             {
-                Id = 123,
-                FirstName = "Oleh",
-                LastName = "Kozlovskiy",
-                TelegramUsername = "@ChrisB"
+                Id = recordDto.Id,
+                FirstName = recordDto.FirstName,
+                LastName = recordDto.LastName,
+                TelegramUsername = recordDto.TelegramUsername
             };
-            string connectionString = builder.ConnectionString;
-            string query = @"INSERT IGNORE INTO Users (Id, FirstName, LastName, TelegramUsername) VALUES (@Id, @FirstName, @LastName, @TelegramUsername)";
-            await using var connection = new SqlConnection(connectionString);
-            await connection.ExecuteAsync(query, user);
+
+            var weatherRequest = new WeatherRequest
+            {
+                UserId = recordDto.Id,
+                Location = recordDto.RequestedCity
+            };
+
+            string insertUser = @"INSERT IGNORE INTO Users (id, first_name, last_name, telegram_username) VALUES (@Id, @FirstName, @LastName, @TelegramUsername)";
+            string insertRequestedCity = @"INSERT INTO WeatherRequestsHistory (user_id, location) VALUES (@UserId, @Location)";
+            using var connection = new MySqlConnection("Server=localhost; User ID=root; Password=1111; Database=TelegramDatabase");
+            await connection.OpenAsync();
+            using var transaction = await connection.BeginTransactionAsync();
+            try
+            {
+                await connection.ExecuteAsync(insertUser, user, transaction);
+                await connection.ExecuteAsync(insertRequestedCity, weatherRequest,transaction);
+                await transaction.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
     }
 }

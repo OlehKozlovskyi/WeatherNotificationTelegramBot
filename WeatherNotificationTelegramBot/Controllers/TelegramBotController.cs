@@ -7,6 +7,7 @@ using WeatherNotificationTelegramBot.Settings;
 
 namespace WeatherNotificationTelegramBot.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     [Route("api/telegram")]
     public class TelegramBotController(IOptions<TelegramBotSettings> options) : ControllerBase
