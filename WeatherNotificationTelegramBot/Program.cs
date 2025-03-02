@@ -22,7 +22,7 @@ namespace WeatherNotificationTelegramBot
             _services.Configure<OpenWeatherApiOptions>(_configuration.GetSection("OpenWeatherApiOptions"));
             _services.ConfigureTelegramBotMvc();
             _services.AddControllers();
-
+            _services.AddMappers();
             var app = builder.Build();
             if (app.Environment.IsDevelopment())
             {

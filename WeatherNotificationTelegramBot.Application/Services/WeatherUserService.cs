@@ -1,25 +1,31 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WeatherNotificationTelegramBot.Application.Abstractions;
 using WeatherNotificationTelegramBot.Application.DTOs;
+using WeatherNotificationTelegramBot.BusinessLogic.Entities;
 
 namespace WeatherNotificationTelegramBot.Application.Services
 {
     public class WeatherUserService : IWeatherUserService
     {
         private readonly IWeatherUserRepository _weatherUserRepository;
+        private readonly IMapper _mapper;
 
-        public WeatherUserService(IWeatherUserRepository weatherUserRepository)
+        public WeatherUserService(IWeatherUserRepository weatherUserRepository, IMapper mapper)
         {
             _weatherUserRepository = weatherUserRepository;
+            _mapper = mapper;
         }
 
         public async Task AddWeatherUserEntryAsync(UserWeatherRecordDto recordDto)
         {
-            await _weatherUserRepository.AddRecord(recordDto);
+            var user = _mapper.Map<User>(recordDto);
+            var weatherRequest = _mapper.Map<WeatherRequest>(recordDto);
+            await _weatherUserRepository.AddRecord(user, weatherRequest);
         }
     }
 }

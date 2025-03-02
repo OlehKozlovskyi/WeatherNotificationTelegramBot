@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WeatherNotificationTelegramBot.Application\WeatherNotificationTelegramBot.Application.csproj" />
+    <ProjectReference Include="..\WeatherNotificationTelegramBot.BusinessLogic\WeatherNotificationTelegramBot.BusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>

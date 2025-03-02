@@ -50,5 +50,10 @@ namespace WeatherNotificationTelegramBot.Extensions
             return services;
         }
 
+        public static IServiceCollection AddMappers(this IServiceCollection services)
+        {
+            return services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+        }
+
     }
 }

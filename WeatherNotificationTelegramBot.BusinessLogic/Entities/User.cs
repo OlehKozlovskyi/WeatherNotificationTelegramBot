@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeatherNotificationTelegramBot.DataAccess.Entities
+namespace WeatherNotificationTelegramBot.BusinessLogic.Entities
 {
     public class User
     {
         public int Id { get; set; }
-        public string FirstName {  get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string TelegramUsername {  get; set; }
+        public string TelegramUsername { get; set; }
         public List<WeatherRequest> WeatherHistory { get; set; }
     }
 }

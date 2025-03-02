@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 using MySqlConnector;
 using WeatherNotificationTelegramBot.Application.Abstractions;
 using WeatherNotificationTelegramBot.Application.DTOs;
-using WeatherNotificationTelegramBot.DataAccess.Entities;
+using WeatherNotificationTelegramBot.BusinessLogic.Entities;
 
 namespace WeatherNotificationTelegramBot.DataAccess.Repositories
 {
@@ -20,22 +20,8 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
         //    _connectionString = connectionString;
         //}
 
-        public async Task AddRecord(UserWeatherRecordDto recordDto)
+        public async Task AddRecord(User user, WeatherRequest weatherRequest)
         {
-            var user = new User
-            {
-                Id = recordDto.Id,
-                FirstName = recordDto.FirstName,
-                LastName = recordDto.LastName,
-                TelegramUsername = recordDto.TelegramUsername
-            };
-
-            var weatherRequest = new WeatherRequest
-            {
-                UserId = recordDto.Id,
-                Location = recordDto.RequestedCity
-            };
-
             string insertUser = @"INSERT IGNORE INTO Users (id, first_name, last_name, telegram_username) VALUES (@Id, @FirstName, @LastName, @TelegramUsername)";
             string insertRequestedCity = @"INSERT INTO WeatherRequestsHistory (user_id, location) VALUES (@UserId, @Location)";
             using var connection = new MySqlConnection("Server=localhost; User ID=root; Password=1111; Database=TelegramDatabase");
