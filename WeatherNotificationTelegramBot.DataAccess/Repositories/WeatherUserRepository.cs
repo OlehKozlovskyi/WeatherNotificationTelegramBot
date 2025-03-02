@@ -15,16 +15,13 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
 {
     public class WeatherUserRepository : IWeatherUserRepository
     {
-        //public WeatherUserRepository(string connectionString)
-        //{
-        //    _connectionString = connectionString;
-        //}
+        private readonly string _connectionString = "Server=localhost; User ID=root; Password=1111; Database=TelegramDatabase";
 
         public async Task AddRecord(User user, WeatherRequest weatherRequest)
         {
             string insertUser = @"INSERT IGNORE INTO Users (id, first_name, last_name, telegram_username) VALUES (@Id, @FirstName, @LastName, @TelegramUsername)";
             string insertRequestedCity = @"INSERT INTO WeatherRequestsHistory (user_id, location) VALUES (@UserId, @Location)";
-            using var connection = new MySqlConnection("Server=localhost; User ID=root; Password=1111; Database=TelegramDatabase");
+            using var connection = new MySqlConnection(_connectionString);
             await connection.OpenAsync();
             using var transaction = await connection.BeginTransactionAsync();
             try
@@ -40,7 +37,7 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
             }
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
             string query = @"SELECT u.id, u.first_name, u.last_name, u.telegram_username, w.id AS weather_request_id, 
                     w.location
@@ -48,7 +45,7 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
                 LEFT JOIN WeatherRequestsHistory w ON u.id = w.user_id
                 WHERE u.id = @UserId;";
             var userDictionary = new Dictionary<int, User>();
-            using var connection = new MySqlConnection("Server=localhost; User ID=root; Password=1111; Database=TelegramDatabase");
+            using var connection = new MySqlConnection(_connectionString);
             var result = await connection.QueryAsync<User, WeatherRequest, User>(
                 query,
                 (user, weatherRequest) =>
@@ -70,6 +67,14 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
                 splitOn: "weather_request_id"
             );
             return result.First();
+        }
+
+        public async Task<List<User>> GetUsersAsync()
+        {
+            string query = @"SELECT * FROM Users";
+            using var connection = new MySqlConnection(_connectionString);
+            var result = await connection.QueryAsync<User>(query);
+            return result.ToList();
         }
     }
 }

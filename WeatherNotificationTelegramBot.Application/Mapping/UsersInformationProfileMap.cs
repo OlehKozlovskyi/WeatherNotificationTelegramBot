@@ -9,11 +9,11 @@ using WeatherNotificationTelegramBot.BusinessLogic.Entities;
 
 namespace WeatherNotificationTelegramBot.Application.Mapping
 {
-    public class UserResponseHistoryProfileMap : Profile
+    public class UsersInformationProfileMap : Profile
     {
-        public UserResponseHistoryProfileMap()
+        public UsersInformationProfileMap()
         {
-            CreateMap<User, UserResponseHistoryDto>()
+            CreateMap<User, UsersInformationDto>()
                 .ForMember(destinationMember => destinationMember.Id, options => options.MapFrom(sourceMember => sourceMember.id))
                 .ForMember(destinationMember => destinationMember.FirstName, options => options.MapFrom(sourceMember => sourceMember.first_name))
                 .ForMember(destinationMember => destinationMember.LastName, options => options.MapFrom(sourceMember => sourceMember.last_name))

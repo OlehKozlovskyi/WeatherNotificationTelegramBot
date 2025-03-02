@@ -1,4 +1,5 @@
 ﻿using WeatherNotificationTelegramBot.Application.DTOs;
+using WeatherNotificationTelegramBot.BusinessLogic.Entities;
 
 namespace WeatherNotificationTelegramBot.Application.Abstractions
 {
@@ -6,5 +7,6 @@ namespace WeatherNotificationTelegramBot.Application.Abstractions
     {
         Task AddWeatherUserEntryAsync(UserWeatherRecordDto recordDto);
         Task<UserResponseHistoryDto> GetUserById(int id);
+        Task<List<UsersInformationDto>> GetUsersAsync();
     }
 }

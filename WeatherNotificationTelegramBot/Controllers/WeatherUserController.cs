@@ -16,10 +16,18 @@ namespace WeatherNotificationTelegramBot.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUserById(int id)
+        [Route("{id}")]
+        public async Task<IActionResult> GetUserById([FromRoute] int id)
         {
             var user = await userService.GetUserById(id);
             return Ok(user);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await userService.GetUsersAsync();
+            return Ok(users);
         }
     }
 }
