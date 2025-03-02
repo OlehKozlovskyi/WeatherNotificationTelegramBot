@@ -27,5 +27,11 @@ namespace WeatherNotificationTelegramBot.Application.Services
             var weatherRequest = _mapper.Map<WeatherRequest>(recordDto);
             await _weatherUserRepository.AddRecord(user, weatherRequest);
         }
+
+        public async Task<UserResponseHistoryDto> GetUserById(int id)
+        {
+            var user = await _weatherUserRepository.GetUserById(id);
+            return _mapper.Map<UserResponseHistoryDto>(user);
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace WeatherNotificationTelegramBot.BusinessLogic.Entities
     {
         public string Location { get; set; }
         public int UserId { get; set; }
+
+        public WeatherRequest() { }
     }
 }

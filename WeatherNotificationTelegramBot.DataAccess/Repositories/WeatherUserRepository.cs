@@ -39,5 +39,37 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
                 throw;
             }
         }
+
+        public async Task<User> GetUserById(int id)
+        {
+            string query = @"SELECT u.id, u.first_name, u.last_name, u.telegram_username, w.id AS weather_request_id, 
+                    w.location
+                FROM Users u
+                LEFT JOIN WeatherRequestsHistory w ON u.id = w.user_id
+                WHERE u.id = @UserId;";
+            var userDictionary = new Dictionary<int, User>();
+            using var connection = new MySqlConnection("Server=localhost; User ID=root; Password=1111; Database=TelegramDatabase");
+            var result = await connection.QueryAsync<User, WeatherRequest, User>(
+                query,
+                (user, weatherRequest) =>
+                {
+
+                    if (userDictionary.TryGetValue(user.id, out var existingUser))
+                    {
+                        user = existingUser;
+                    }
+                    else
+                    {
+                        userDictionary.Add(user.id, user);
+                        user.weather_history = new List<string>();
+                    }
+                    user.weather_history.Add(weatherRequest.Location);
+                    return user;
+                },
+                new { UserId = id },
+                splitOn: "weather_request_id"
+            );
+            return result.First();
+        }
     }
 }

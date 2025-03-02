@@ -6,5 +6,6 @@ namespace WeatherNotificationTelegramBot.Application.Abstractions
     public interface IWeatherUserRepository
     {
         Task AddRecord(User user, WeatherRequest weatherRequest);
+        Task<User> GetUserById(int id);
     }
 }
