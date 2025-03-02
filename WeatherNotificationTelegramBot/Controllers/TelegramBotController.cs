@@ -2,16 +2,17 @@
 using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using WeatherNotificationTelegramBot.Application.Abstractions;
 using WeatherNotificationTelegramBot.Application.Services;
 using WeatherNotificationTelegramBot.Settings;
 
 namespace WeatherNotificationTelegramBot.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     [Route("api/telegram")]
-    public class TelegramBotController(IOptions<TelegramBotSettings> options) : ControllerBase
+    public class TelegramBotController(IOptions<TelegramBotSettings> options, IOpenWeatherService openWeatherService) : ControllerBase
     {
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpGet("set-webhook")]
         public async Task<string> SetWebHook([FromServices] ITelegramBotClient client, CancellationToken cancellationToken)
         {
@@ -20,6 +21,7 @@ namespace WeatherNotificationTelegramBot.Controllers
             return $"Webhook is connected to {url}";
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost("update")]
         public async Task<IActionResult> Post([FromBody] Update update, [FromServices] ITelegramBotClient bot, 
             [FromServices] UpdateHandleService handleUpdateService, CancellationToken ct)
@@ -33,6 +35,25 @@ namespace WeatherNotificationTelegramBot.Controllers
             catch (Exception exception)
             {
                 await handleUpdateService.HandleErrorAsync(bot, exception, Telegram.Bot.Polling.HandleErrorSource.HandleUpdateError, ct);
+            }
+            return Ok();
+        }
+
+        [HttpPost("sendWeatherToAll")]
+        public async Task<IActionResult> SendWeatherToAll([FromServices] ITelegramBotClient bot, [FromServices] IOpenWeatherService weatherService, 
+            [FromServices] IWeatherUserService weatherUserService, [FromQuery] string cityName, CancellationToken ct)
+        {
+            var users = await weatherUserService.GetUsersAsync();
+            foreach (var user in users)
+            {
+                var weatherInfo = await weatherService.GetWeatherAsync(cityName);
+                var messageTemplate = $@"
+                    На даний час у {weatherInfo.Name}❤ погодні умови змінюються
+                    температура повітря становить близько {weatherInfo.Main.Temp}°C🌡️ i відчувається як {weatherInfo.Main.Feels_Like}°C. 
+                    Вітер помірний, з поривами до {weatherInfo.Wind.Speed} км/год🌬️.
+                    Атмосферний тиск зараз складає {weatherInfo.Main.Pressure} мм рт. ст.😧
+                    ";
+                await bot.SendMessage(user.Id, messageTemplate);
             }
             return Ok();
         }
