@@ -5,6 +5,7 @@ using WeatherNotificationTelegramBot.Application.Abstractions;
 using WeatherNotificationTelegramBot.Application.Helpers;
 using WeatherNotificationTelegramBot.Application.Services;
 using WeatherNotificationTelegramBot.Settings;
+using WeatherNotificationTelegramBot.DataAccess.Repositories;
 
 namespace WeatherNotificationTelegramBot.Extensions
 {
@@ -29,6 +30,8 @@ namespace WeatherNotificationTelegramBot.Extensions
             services.AddSingleton<UpdateHandleService>();
             services.AddSingleton<IOpenWeatherService, OpenWeatherService>();
             services.AddSingleton<IWeatherParser, WeatherJsonParser>();
+            services.AddScoped<IWeatherUserRepository, WeatherUserRepository>();
+            services.AddScoped<IWeatherUserService, WeatherUserService>();
             return services;
         }
     }

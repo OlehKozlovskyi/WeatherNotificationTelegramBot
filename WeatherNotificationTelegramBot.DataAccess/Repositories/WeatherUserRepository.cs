@@ -9,22 +9,23 @@ using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 using MySql.Data.MySqlClient;
+using WeatherNotificationTelegramBot.Application.Abstractions;
 using WeatherNotificationTelegramBot.DataAccess.Entities;
 
 namespace WeatherNotificationTelegramBot.DataAccess.Repositories
 {
-    public class UserRepository
+    public class WeatherUserRepository : IWeatherUserRepository
     {
         private readonly string _connectionString;
 
-        public UserRepository(string connectionString) 
+        public WeatherUserRepository(string connectionString)
         {
             _connectionString = connectionString;
         }
 
         public async Task AddUser(string id, string firstName, string lastName, string telegramUsername)
         {
-            var builder = new MySqlConnectionStringBuilder 
+            var builder = new MySqlConnectionStringBuilder
             {
                 Server = "localhost",
                 Database = "TelegramDatabase",
