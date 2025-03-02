@@ -31,8 +31,8 @@ namespace WeatherNotificationTelegramBot.Extensions
             services.AddSingleton<UpdateHandleService>();
             services.AddSingleton<IOpenWeatherService, OpenWeatherService>();
             services.AddSingleton<IWeatherParser, WeatherJsonParser>();
-            services.AddScoped<IWeatherUserRepository, WeatherUserRepository>();
-            services.AddScoped<IWeatherUserService, WeatherUserService>();
+            services.AddSingleton<IWeatherUserRepository, WeatherUserRepository>();
+            services.AddSingleton<IWeatherUserService, WeatherUserService>();
             return services;
         }
 

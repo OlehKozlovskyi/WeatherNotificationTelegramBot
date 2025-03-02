@@ -17,12 +17,10 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
 {
     public class WeatherUserRepository : IWeatherUserRepository
     {
-        private readonly string _connectionString;
-
-        public WeatherUserRepository(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+        //public WeatherUserRepository(string connectionString)
+        //{
+        //    _connectionString = connectionString;
+        //}
 
         public async Task AddRecord(UserWeatherRecordDto recordDto)
         {
