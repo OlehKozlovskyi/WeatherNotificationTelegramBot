@@ -1,9 +1,14 @@
-﻿namespace WeatherNotificationtelegramBot.DataAccess.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WeatherNotificationTelegramBot.DataAccess.Entities
 {
     public class WeatherRequest
     {
-        public Guid RequestId { get; set; }
-        public string RequestLocation {  get; set; }
-        public DateTime RequestCreationDate { get; set; }
+        public string Location {  get; set; }
+        public string UserId {  get; set; }
     }
 }

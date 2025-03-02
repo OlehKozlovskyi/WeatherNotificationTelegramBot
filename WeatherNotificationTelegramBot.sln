@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherNotificationTelegram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherNotificationTelegramBot.Application", "WeatherNotificationTelegramBot.Application\WeatherNotificationTelegramBot.Application.csproj", "{8411EC96-7F0F-44AF-BFD4-97F738932E76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherNotificationtelegramBot.DataAccess", "WeatherNotificationtelegramBot.DataAccess\WeatherNotificationtelegramBot.DataAccess.csproj", "{39A832BF-849F-4765-B0ED-1382E8B71F5C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherNotificationTelegramBot.DataAccess", "WeatherNotificationTelegramBot.DataAccess\WeatherNotificationTelegramBot.DataAccess.csproj", "{C882A77D-66EE-4169-B3F4-0369CBA34100}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{8411EC96-7F0F-44AF-BFD4-97F738932E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8411EC96-7F0F-44AF-BFD4-97F738932E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8411EC96-7F0F-44AF-BFD4-97F738932E76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{39A832BF-849F-4765-B0ED-1382E8B71F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{39A832BF-849F-4765-B0ED-1382E8B71F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{39A832BF-849F-4765-B0ED-1382E8B71F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{39A832BF-849F-4765-B0ED-1382E8B71F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C882A77D-66EE-4169-B3F4-0369CBA34100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C882A77D-66EE-4169-B3F4-0369CBA34100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C882A77D-66EE-4169-B3F4-0369CBA34100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C882A77D-66EE-4169-B3F4-0369CBA34100}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

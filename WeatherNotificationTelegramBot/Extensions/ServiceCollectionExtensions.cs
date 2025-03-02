@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Telegram.Bot;
+using WeatherNotificationTelegramBot.DataAccess;
 using WeatherNotificationTelegramBot.Application.Abstractions;
 using WeatherNotificationTelegramBot.Application.Helpers;
 using WeatherNotificationTelegramBot.Application.Services;
@@ -16,7 +17,7 @@ namespace WeatherNotificationTelegramBot.Extensions
             return services;
         }
 
-        public static IServiceCollection AddTelegramClientSettings(this IServiceCollection services, string sectionName, 
+        public static IServiceCollection AddTelegramClientSettings(this IServiceCollection services, string sectionName,
             IConfiguration configuration)
         {
             services.Configure<TelegramBotSettings>(configuration.GetSection(sectionName));

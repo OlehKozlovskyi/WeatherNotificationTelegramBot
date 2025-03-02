@@ -29,7 +29,6 @@ namespace WeatherNotificationTelegramBot
             app.UseAuthorization();
 
             app.MapControllers();
-
             app.Run();
         }
     }

@@ -12,8 +12,8 @@ namespace WeatherNotificationTelegramBot.Application.Services
 {
     public class OpenWeatherService : IOpenWeatherService
     {
-        private IWeatherParser _weatherParser;
-        private OpenWeatherApiOptions _apiOptions;
+        private readonly IWeatherParser _weatherParser;
+        private readonly OpenWeatherApiOptions _apiOptions;
 
         public OpenWeatherService(IWeatherParser weatherParser, IOptions<OpenWeatherApiOptions> options)
         {
