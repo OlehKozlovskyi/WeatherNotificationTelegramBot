@@ -57,6 +57,21 @@ namespace WeatherNotificationTelegramBot.Controllers
             }
             return Ok();
         }
+
+        [HttpPost("sendWeatherToUser/{userId}")]
+        public async Task<IActionResult> SendWeatherToUser([FromServices] ITelegramBotClient bot, [FromServices] IOpenWeatherService weatherService,
+            [FromServices] IWeatherUserService weatherUserService, [FromQuery] string cityName, [FromRoute] string userId, CancellationToken ct)
+        {
+            var weatherInfo = await weatherService.GetWeatherAsync(cityName);
+            var messageTemplate = $@"
+                На даний час у {weatherInfo.Name}❤ погодні умови змінюються
+                температура повітря становить близько {weatherInfo.Main.Temp}°C🌡️ i відчувається як {weatherInfo.Main.Feels_Like}°C. 
+                Вітер помірний, з поривами до {weatherInfo.Wind.Speed} км/год🌬️.
+                Атмосферний тиск зараз складає {weatherInfo.Main.Pressure} мм рт. ст.😧
+                ";
+            await bot.SendMessage(userId, messageTemplate);
+            return Ok();
+        }
     }
 
 }
