@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WeatherNotificationTelegramBot.Application.Abstractions;
+using WeatherNotificationTelegramBot.Application.DTOs;
 
 namespace WeatherNotificationTelegramBot.Application.Services
 {
@@ -16,9 +17,9 @@ namespace WeatherNotificationTelegramBot.Application.Services
             _weatherUserRepository = weatherUserRepository;
         }
 
-        public async Task AddUser(string id, string firstName, string lastName, string telegramUsername)
+        public async Task AddWeatherUserEntryAsync(UserWeatherRecordDto recordDto)
         {
-            await _weatherUserRepository.AddUser(id, firstName, lastName, telegramUsername);
+            await _weatherUserRepository.AddRecord(recordDto);
         }
     }
 }

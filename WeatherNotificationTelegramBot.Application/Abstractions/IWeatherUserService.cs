@@ -1,7 +1,9 @@
-﻿namespace WeatherNotificationTelegramBot.Application.Abstractions
+﻿using WeatherNotificationTelegramBot.Application.DTOs;
+
+namespace WeatherNotificationTelegramBot.Application.Abstractions
 {
     public interface IWeatherUserService
     {
-        Task AddUser(string id, string firstName, string lastName, string telegramUsername);
+        Task AddWeatherUserEntryAsync(UserWeatherRecordDto recordDto);
     }
 }

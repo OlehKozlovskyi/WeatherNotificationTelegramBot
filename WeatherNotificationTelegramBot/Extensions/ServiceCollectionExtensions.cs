@@ -6,6 +6,7 @@ using WeatherNotificationTelegramBot.Application.Helpers;
 using WeatherNotificationTelegramBot.Application.Services;
 using WeatherNotificationTelegramBot.Settings;
 using WeatherNotificationTelegramBot.DataAccess.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace WeatherNotificationTelegramBot.Extensions
 {
@@ -34,5 +35,20 @@ namespace WeatherNotificationTelegramBot.Extensions
             services.AddScoped<IWeatherUserService, WeatherUserService>();
             return services;
         }
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        {
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo 
+                { 
+                    Title = "WeatherNotificationTelegramBot", 
+                    Version = "v1" 
+                });
+            });
+            return services;
+        }
+
     }
 }

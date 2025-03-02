@@ -10,6 +10,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 using MySql.Data.MySqlClient;
 using WeatherNotificationTelegramBot.Application.Abstractions;
+using WeatherNotificationTelegramBot.Application.DTOs;
 using WeatherNotificationTelegramBot.DataAccess.Entities;
 
 namespace WeatherNotificationTelegramBot.DataAccess.Repositories
@@ -23,7 +24,7 @@ namespace WeatherNotificationTelegramBot.DataAccess.Repositories
             _connectionString = connectionString;
         }
 
-        public async Task AddUser(string id, string firstName, string lastName, string telegramUsername)
+        public async Task AddRecord(UserWeatherRecordDto recordDto)
         {
             var builder = new MySqlConnectionStringBuilder
             {
